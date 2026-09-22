@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Developer</title>
+
+    <style>
+        /* Selector universal */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        /* Selector tag */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            color: #1f2937;
+        }
+
+        /* Selector class */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            background-color: #1e3a8a;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Selector child */
+        .menu > li {
+            display: inline-block;
+            list-style: none;
+            margin-left: 25px;
+        }
+
+        /* Selector descendant */
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        /* Pseudo-class */
+        .menu a:hover,
+        .menu a.active {
+            color: #facc15;
+        }
+
+        /* Selector ID */
+        #home {
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            padding: 80px 8%;
+            background: linear-gradient(135deg, #dbeafe, #eff6ff);
+        }
+
+        .hero-text {
+            max-width: 550px;
+        }
+
+        .hero-text h1 {
+            font-size: 45px;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        /* Selector atribut */
+        a[href="#kontak"] {
+            background-color: #f59e0b;
+            padding: 12px 20px;
+            border-radius: 8px;
+        }
+
+        a[href="#kontak"]:hover {
+            background-color: #d97706;
+            color: white;
+        }
+
+        .hero-image {
+            font-size: 140px;
+        }
+
+        section {
+            padding: 70px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 35px;
+            font-size: 32px;
+        }
+
+        /* Pseudo-element */
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 70px;
+            height: 4px;
+            margin: 10px auto;
+            background-color: #f59e0b;
+            border-radius: 5px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 2fr);
+            gap: 25px;
+        }
+
+         .cards1 {
+            display: grid;
+            grid-template-columns: repeat(3, 2fr);
+            gap: 25px;
+        }
+
+        .cards3 {
+            display: grid;
+            grid-template-columns: repeat(6, 2fr);
+            gap: 25px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .card .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            line-height: 1.6;
+            color: #64748b;
+        }
+
+        .about {
+            background-color: white;
+            text-align: center;
+        }
+
+        .about p {
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.8;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 5px rgba(37, 99, 235, 0.4);
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background-color: #1e3a8a;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #2563eb;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #1e3a8a;
+            color: white;
+        }
+
+        /* Tombol menu mobile */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* Tampilan tablet dan handphone */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                right: 8%;
+                width: 200px;
+                padding: 15px;
+                background-color: #1e3a8a;
+                border-radius: 8px;
+            }
+
+            .menu.show {
+                display: block;
+            }
+
+            .menu > li {
+                display: block;
+                margin: 15px 0;
+            }
+
+            #home {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 35px;
+            }
+
+            .hero-image {
+                font-size: 90px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigasi -->
+    <nav class="navbar">
+        <img src="https://logos.ruangkosong.net/wp-content/uploads/2018/07/logo-SMK-Negeri-1-Subang_fea-800x500.png.webp" width="100">
+        <div class="logo">SMKN 1 Subang</div>
+
+        <button class="menu-toggle" id="menuToggle">
+            ☰
+        </button>
+
+        <ul class="menu" id="menu">
+            <li><a href="#home" class="active">Beranda</a></li>
+            <li><a href="#profesi">Profesi</a></li>
+            <li><a href="#skill">Skill</a></li>
+            <li><a href="#tools & teknologi">tools & teknologi</a></li>
+        </ul>
+    </nav>
+
+    <!-- Bagian Beranda -->
+    <main>
+        <section id="home">
+
+            <div class="hero-image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1syO8JnAWjIOaqi1rIBNb403qOm5W1WSqGlrRWYDQnA&s=10">
+            </div>
+
+            <div class="hero-text">
+            <h1>Web Developer</h1>
+
+            <p>
+                Web developer adalah seorang pemrogram yang bertugas merancang, membangun, dan memelihara situs atau aplikasi web agar dapat berjalan dengan stabil dan mudah digunakan.
+            </p>
+
+    <a href="#kontak">Hubungi Kami</a>
+</div>
+
+           
+        </section>
+
+        <!-- Bagian profesi -->
+        <section id="profesi">
+            <h2 class="section-title">Profesi kami</h2>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Frontend Developer</h3>
+                    <p>
+                        membuat tampilan website.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Backend Developer</h3>
+                    <p>
+                        mengatur sistem dan server website.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Full Stack Developer</h3>
+                    <p>
+                        mengerjakan bagian frontend dan backend
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Web Designer</h3>
+                    <p>
+                        merancang tampilan dan desain website.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>UI/UX Designer</h3>
+                    <p>
+                        membuat desain yang mudah dan nyaman digunakan.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>WordPress Developern</h3>
+                    <p>
+                        membuat dan mengembangkan website menggunakan WordPress.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Web Programmer</h3>
+                    <p>
+                        membuat fitur dan fungsi pada website.
+                    </p>
+
+                 <div class="card">
+                    <h3>Web Developer</h3>
+                    <p>
+                        mengembangkan dan memelihara website secara keseluruhan.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Tentang -->
+        <section id="skill" class="about">
+            <h2 class="section-title">Tools & Teknologi</h2>
+            
+            <div class="cards1">
+                <div class="card">
+                    <img src="https://www.theforage.com/blog/wp-content/uploads/2022/09/what-is-a-web-developer.jpg" width="80">
+                    <h3>HTML</h3>
+                    <p>
+                    membuat struktur halaman website.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <img src="https://www.theforage.com/blog/wp-content/uploads/2022/09/what-is-a-web-developer.jpg" width="80">
+                    <h3>CSS</h3>
+                    <p>
+                    mengatur tampilan dan desain website.
+                    </p>
+                </div>
+            
+                <div class="card">
+                    <img src="https://www.theforage.com/blog/wp-content/uploads/2022/09/what-is-a-web-developer.jpg" width="80">
+                    <h3>JavaScript</h3>
+                    <p>
+                    membuat website menjadi interaktif.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <img src="https://www.theforage.com/blog/wp-content/uploads/2022/09/what-is-a-web-developer.jpg" width="80">
+                    <h3>PHP</h3>
+                    <p>
+                    membuat fungsi dan sistem pada website.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <img src="https://www.theforage.com/blog/wp-content/uploads/2022/09/what-is-a-web-developer.jpg" width="80">
+                    <h3>DataBase</h3>
+                    <p>
+                    mengelola dan menyimpan data website.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <img src="https://www.theforage.com/blog/wp-content/uploads/2022/09/what-is-a-web-developer.jpg" width="80">
+                    <h3>Responsive Design</h3>
+                    <p>
+                    membuat website menyesuaikan berbagai ukuran layar.
+                    </p>
+                </div>
+            </div>
+                
+        </section>
+
+        <!-- Bagian Kontak -->
+        <section id="tools $ teknologi">
+            <h2 class="section-title">Skill kami</h2>
+            
+            <div class="cards3">
+            <div class="card">
+                    <h3>Visual Studio Code (VS Code)</h3>
+                    <p>
+                        Editor kode yang populer untuk pengembangan web.
+                    </p>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCOTIV4Tb4h16YNEwanHL3esW2nwwumHYqAFgcVaMUOw&s" width="80">
+                </div>
+
+                <div class="card">
+                    <h3>Sublime Text</h3>
+                    <p>
+                        Editor kode yang populer untuk pengembangan web.
+                    </p>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/d/d2/Sublime_Text_3_logo.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original" width="80">
+                </div>
+
+                <div class="card">
+                    <h3>Git</h3>
+                    <p>
+                        Sistem kontrol versi yang digunakan untuk melacak perubahan dalam kode dan mengelola kolaborasi pengembangan.
+                    </p>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkz_1LLnlNKBkSAHMLNnFZtRN4obb2QsD3V9remQeeuQ&s=10" width="80">
+                </div>
+
+                <div class="card">
+                    <h3>GitHub</h3>
+                    <p>
+                        Platform hosting dan kontrol versi yang populer untuk kolaborasi pengembangan software.
+                    </p>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgTF_9yrKtSIHOfTNX0h-Myw8cexI69vvHA2P0UzDKPg&s=10" width="80">
+                </div>
+
+                <div class="card">
+                    <h3>Chrome DevTools</h3>
+                    <p>
+                        Alat pengembang yang disertakan dalam browser Chrome untuk debugging dan optimasi halaman web.
+                    </p>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnPLtozKCYobFyNldA4l_SoWU2v414LybEqK2AXAeL5Q&s=10" width="80">
+                </div>
+
+                <div class="card">
+                    <h3>Postman</h3>
+                    <p>
+                        Alat untuk pengujian dan pengembangan API.
+                    </p>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7Ea2lF07GmIuY8KkUK_GTi-aUSF6YPNBsgyVK2FlMFQ&s=10" width="80">
+                </div>
+
+                <div class="card">
+                    <h3>Figma</h3>
+                    <p>
+                        Alat desain dan prototyping yang populer untuk pengembangan UI/UX.
+                    </p>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeZO24jIBjfOq6nqALFTKGLFJdMgq054pppKp538AYSQ&s=10" width="80">
+                </div>
+                <div class="card">
+                    <h3>Node Package Manager (npm)</h3>
+                    <p>
+                        Alat manajemen paket untuk Node.js yang digunakan untuk mengelola dependensi dan script pengembangan.
+                    </p>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzVhEoxAP3s_jgfBJj1uQ8S0xaD-nykYYaS3f90glepw&s=10" width="80">
+                </div>
+                <div class="card">
+                    <h3>Webpack</h3>
+                    <p>
+                        Alat bundling untuk mengelola dan mengoptimalkan aset dan dependensi dalam aplikasi JavaScript.
+                    </p>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-MjAdnEfxRHmFJHURzHSvh3FLIVwNEr73-nQEuuLvAA&s=10" width="80">
+                </div>
+                <div class="card">
+                    <h3>React</h3>
+                    <p>
+                        Library JavaScript untuk membangun antarmuka pengguna yang interaktif dan responsif. 
+                    </p>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGRqtKd8O17OleqYZtujpqTnnH9Ez1m710qVJZysQGWQ&s=10" width="80">
+                </div>
+                <div class="card">
+                    <h3>Tailwind CSS</h3>
+                    <p>
+                        Framework CSS yang memudahkan pengembangan desain responsif dan modern dengan utility-first approach.
+                    </p>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQCM2wlXVXzSeNnOI0lYBH1FbiIJlrHFI1MvV1mX_rfA&s=10" width="80">
+                </div>
+                <div class="card">
+                    <h3>Docker</h3>
+                    <p>
+                        Platform containerization yang memungkinkan pengembang untuk membuat, mengirim, dan menjalankan aplikasi dalam container yang konsisten.
+                    </p>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2RH-b9PAJVDpvnLgTVrPSKn-2d129feq3JlJ6AKAOug&s=10" width="80">
+                </div>
+            </section>
+
+    <footer>
+        <p>&copy; 2026 BelajarWeb. Semua hak dilindungi.</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector("#menuToggle");
+        const menu = document.querySelector("#menu");
+
+        menuToggle.addEventListener("click", function () {
+            menu.classList.toggle("show");
+        });
+
+        const menuLinks = document.querySelectorAll(".menu a");
+
+        menuLinks.forEach(function (link) {
+            link.addEventListener("click", function () {
+                menuLinks.forEach(function (item) {
+                    item.classList.remove("active");
+                });
+
+                link.classList.add("active");
+                menu.classList.remove("show");
+            });
+        });
+    </script>
+
+</body>
+</html>
